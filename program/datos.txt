@@ -1,0 +1,10 @@
+Juan Pérez  , 25, juan@email.com  
+María García,, maria@email.com
+  Carlos López , 30, carlos@email.com
+Ana Martínez, 22,   
+  Pedro Ramírez , 28, pedro@email.com  
+, 35, sinNombre@email.com
+Lucía Torres, 27, lucia@email.com  
+  Roberto Díaz,, roberto@email.com
+Sofía Hernández, 31, sofia@email.com
+  , ,

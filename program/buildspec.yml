@@ -1,0 +1,42 @@
+version: 0.2
+
+env:
+  variables:
+    VERSION: "v1.0"          # Cambia esto manualmente para registrar una nueva versión
+
+phases:
+
+  install:
+    runtime-versions:
+      python: 3.11
+    commands:
+      - echo "=== Instalando dependencias ==="
+      - pip install --upgrade pip
+
+  pre_build:
+    commands:
+      - echo "=== Construyendo imagen Docker ==="
+      - docker build -t procesador-datos .
+
+  build:
+    commands:
+      - echo "=== Ejecutando contenedor Docker ==="
+      # Ejecuta el contenedor y copia los archivos generados al host
+      - docker run --name procesador procesador-datos
+      - docker cp procesador:/app/resultado.txt .
+      - docker cp procesador:/app/backup.log .
+      - docker rm procesador
+      - echo "=== Contenido del backup.log ==="
+      - cat backup.log
+
+  post_build:
+    commands:
+      - echo "=== Subiendo archivos a S3 ==="
+      - aws s3 cp resultado.txt s3://calcudemo/resultado.txt
+      - aws s3 cp backup.log   s3://calcudemo/backup.log
+      - echo "=== Build finalizado correctamente ==="
+
+artifacts:
+  files:
+    - resultado.txt
+    - backup.log
