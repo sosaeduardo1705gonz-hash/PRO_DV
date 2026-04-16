@@ -32,8 +32,8 @@ phases:
   post_build:
     commands:
       - echo "=== Subiendo archivos a S3 ==="
-      - aws s3 cp resultado.txt s3://calcudemo/resultado.txt
-      - aws s3 cp backup.log   s3://calcudemo/backup.log
+      - aws s3 cp resultado.txt s3://dvprog/resultado.txt
+      - aws s3 cp backup.log   s3://dvprog/backup.log
       - echo "=== Build finalizado correctamente ==="
 
 artifacts:
